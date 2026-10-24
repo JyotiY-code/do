@@ -1,0 +1,45 @@
+# 1. Factorial Using Recursion
+
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+n = 5
+print("Factorial of", n, "=", factorial(n))
+
+
+# 2. Fibonacci Series Using Recursion
+
+def fibonacci(n):
+    if n <= 1:
+        return n
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+n = 7
+
+print("Fibonacci Series:")
+
+for i in range(n):
+    print(fibonacci(i), end=" ")
+
+
+# 3. Tower of Hanoi Using Recursion
+
+def tower_of_hanoi(n, source, auxiliary, destination):
+    if n == 1:
+        print("Move disk 1 from", source, "to", destination)
+        return
+
+    tower_of_hanoi(n - 1, source, destination, auxiliary)
+
+    print("Move disk", n, "from", source, "to", destination)
+
+    tower_of_hanoi(n - 1, auxiliary, source, destination)
+
+
+n = 3
+print("\nTower of Hanoi:")
+tower_of_hanoi(n, 'A', 'B', 'C')
