@@ -1,0 +1,64 @@
+# Aim: To implement basic set operations such as add, remove, union, intersection, difference and symmetric difference using Python.
+
+import csv
+import os
+
+# --- Helper: Create a sample sets.csv file if it doesn't exist ---
+if not os.path.exists("sets.csv"):
+    with open("sets.csv", "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["set1", "set2"])
+        writer.writerow([1, 3])
+        writer.writerow([2, 4])
+        writer.writerow([3, 5])
+
+# --- Function Definitions ---
+def add_elements(s, elem):
+    s.add(elem)
+
+def remove_elements(s, elem):
+    s.discard(elem)
+
+def display_set(s, name):
+    print(name, ":", s)
+
+def union_sets(s1, s2):
+    return s1 | s2
+
+def intersection_sets(s1, s2):
+    return s1 & s2
+
+def difference_sets(s1, s2):
+    return s1 - s2
+
+def symmetric_difference_sets(s1, s2):
+    return s1 ^ s2
+
+# --- Main Program Execution ---
+set1 = set()
+set2 = set()
+
+# Read data from CSV file
+with open("sets.csv", "r") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        set1.add(int(row["set1"]))
+        set2.add(int(row["set2"]))
+
+# Initial Display
+display_set(set1, "Set1")
+display_set(set2, "Set2")
+
+# Perform Add and Remove Operations
+add_elements(set1, 20)
+remove_elements(set1, 2)
+
+print("\nAfter Add and Remove:")
+display_set(set1, "Set1")
+display_set(set2, "Set2")
+
+# Perform and Print Set Operations
+print("\nUnion :", union_sets(set1, set2))
+print("Intersection :", intersection_sets(set1, set2))
+print("Set1 - Set2 :", difference_sets(set1, set2))
+print("Symmetric Difference :", symmetric_difference_sets(set1, set2))
