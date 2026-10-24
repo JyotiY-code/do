@@ -1,0 +1,96 @@
+# 1. Simple Queue
+
+queue = []
+
+def enqueue(item):
+    queue.append(item)
+
+def dequeue():
+    if len(queue) == 0:
+        print("Queue is empty")
+    else:
+        return queue.pop(0)
+
+enqueue(10)
+enqueue(20)
+enqueue(30)
+
+print("Queue:", queue)
+print("Dequeued:", dequeue())
+print("Queue:", queue)
+
+
+# 2. Circular Queue
+
+capacity = 5
+queue = [None] * capacity
+front = -1
+rear = -1
+
+def enqueue(value):
+    global front, rear
+
+    if (rear + 1) % capacity == front:
+        print("Queue is full")
+        return
+
+    if front == -1:
+        front = 0
+
+    rear = (rear + 1) % capacity
+    queue[rear] = value
+
+    print(value, "inserted")
+
+
+def dequeue():
+    global front, rear
+
+    if front == -1:
+        print("Queue is empty")
+        return
+
+    value = queue[front]
+    queue[front] = None
+
+    if front == rear:
+        front = -1
+        rear = -1
+    else:
+        front = (front + 1) % capacity
+
+    print(value, "deleted")
+
+
+def display():
+    if front == -1:
+        print("Queue is empty")
+        return
+
+    print("Queue:", end=" ")
+
+    i = front
+
+    while True:
+        print(queue[i], end=" ")
+
+        if i == rear:
+            break
+
+        i = (i + 1) % capacity
+
+    print()
+
+
+enqueue(10)
+enqueue(20)
+enqueue(30)
+enqueue(40)
+enqueue(50)
+
+display()
+
+dequeue()
+dequeue()
+
+display()
