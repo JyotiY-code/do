@@ -1,0 +1,88 @@
+# Aim: To implement various sorting algorithms (Insertion, Bubble, Merge, and Quick Sort) in Python.
+
+# 1. Insertion Sort
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and key < arr[j]:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+    return arr
+
+
+# 2. Bubble Sort
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr
+
+
+# 3. Merge Sort
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        L = arr[:mid]
+        R = arr[mid:]
+
+        merge_sort(L)
+        merge_sort(R)
+
+        i = j = k = 0
+
+        while i < len(L) and j < len(R):
+            if L[i] < R[j]:
+                arr[k] = L[i]
+                i += 1
+            else:
+                arr[k] = R[j]
+                j += 1
+            k += 1
+
+        while i < len(L):
+            arr[k] = L[i]
+            i += 1
+            k += 1
+
+        while j < len(R):
+            arr[k] = R[j]
+            j += 1
+            k += 1
+    return arr
+
+
+# 4. Quick Sort
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[0]
+    left = [x for x in arr[1:] if x < pivot]
+    right = [x for x in arr[1:] if x >= pivot]
+    return quick_sort(left) + [pivot] + quick_sort(right)
+
+
+# --- Driver Code ---
+if __name__ == "__main__":
+    data_insertion = [12, 11, 13, 5, 6]
+    data_bubble = [64, 34, 25, 12, 22, 11, 90]
+    data_merge = [38, 27, 43, 3, 9, 82, 10]
+    data_quick = [38, 27, 32, 4, 3, 3, 9, 28, 82]
+
+    print("Original (Insertion):", data_insertion)
+    print("Sorted (Insertion):", insertion_sort(data_insertion))
+    print("-" * 40)
+
+    print("Original (Bubble):", data_bubble)
+    print("Sorted (Bubble):", bubble_sort(data_bubble))
+    print("-" * 40)
+
+    print("Original (Merge):", data_merge)
+    print("Sorted (Merge):", merge_sort(data_merge))
+    print("-" * 40)
+
+    print("Original (Quick):", data_quick)
+    print("Sorted (Quick):", quick_sort(data_quick))
