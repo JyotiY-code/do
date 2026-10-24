@@ -1,0 +1,57 @@
+# Aim: Implement linear search to find an element in a list (Simple, Books, and Lucky Draw)
+
+import random
+
+# Core Linear Search Function (Index based)
+def linear_search(arr, target):
+    for index in range(len(arr)):
+        if arr[index] == target:
+            return index
+    return -1
+
+# Core Linear Search Function (Boolean based for lucky draw)
+def linear_search_bool(winner_list, your_number):
+    for number in winner_list:
+        if number == your_number:
+            return True
+    return False
+
+
+# --- 1. Simple Linear Search ---
+print("--- 1. Simple Linear Search ---")
+numbers = [4, 5, 3, 2, 6, 7]
+print("Numbers list:", numbers)
+key = 3  # Simulated input key
+result = linear_search(numbers, key)
+
+if result != -1:
+    print(f"Element {key} found at index {result}")
+else:
+    print(f"Element {key} not found in the list")
+
+
+# --- 2. Lost and Found (Finding a book) ---
+print("\n--- 2. Lost and Found (Books) ---")
+books = [2, 4, 5, 7, 8, 9]
+print("Books list:", books)
+book_key = 7  # Simulated input key
+result_book = linear_search(books, book_key)
+
+if result_book != -1:
+    print(f"Book {book_key} found at index {result_book}")
+else:
+    print(f"For book {book_key} not found in the list")
+
+
+# --- 3. Lucky Draw Checker ---
+print("\n--- 3. Lucky Draw Checker ---")
+winning_number = random.sample(range(1000, 9999), 10)
+print("Winning ticket numbers:", winning_number)
+
+your_ticket = winning_number[3]  # Picking one valid ticket for demo, or change to test
+print(f"Your entered ticket: {your_ticket}")
+
+if linear_search_bool(winning_number, your_ticket):
+    print("Congratulations! Your ticket is a winner")
+else:
+    print("Sorry, better luck next time")
