@@ -1,0 +1,50 @@
+# Aim: To write a Python program to convert an infix expression into a postfix expression using Stack.
+
+def precedence(op):
+    if op == '+' or op == '-':
+        return 1
+    if op == '*' or op == '/':
+        return 2
+    if op == '^' or op == ':':  # included for general completeness
+        return 3
+    return 0
+
+def infix_to_postfix(expression):
+    stack = []
+    result = ""
+    
+    for ch in expression:
+        # Ignore spaces
+        if ch == ' ':
+            continue
+            
+        # If character is an operand, add it to result
+        if ch.isalnum():
+            result += ch
+            
+        # If character is '(', push it to stack
+        elif ch == '(':
+            stack.append(ch)
+            
+        # If character is ')', pop and output from stack until '(' is found
+        elif ch == ')':
+            while stack and stack[-1] != '(':
+                result += stack.pop()
+            stack.pop() # Remove '(' from stack
+            
+        # If an operator is encountered
+        else:
+            while stack and precedence(stack[-1]) >= precedence(ch):
+                result += stack.pop()
+            stack.append(ch)
+            
+    # Pop all the remaining operators from the stack
+    while stack:
+        result += stack.pop()
+        
+    return result
+
+# Driver code
+infix = "A + B * C"
+print("Infix:", infix)
+print("Postfix:", infix_to_postfix(infix))
